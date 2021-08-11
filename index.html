@@ -21,7 +21,7 @@
 	<!-- Header end -->
 
 	<!-- First screen start -->
-	<section class="screen-1">
+	<section class="screen-1 hidden">
 
 		<!-- Create quizzes start -->
 		<section class="create-initial-quizz">
@@ -98,8 +98,9 @@
 
 	<!-- Third screen start -->
 	<section class="screen-3">
-		<div>
-			<section class="info-quizz">
+		<!-- create question form-->
+		<div class="hidden">
+			<section class="form info-quizz">
 				<h1>Comece pela começo</h1>
 				<form action="">
 					<input type="text" placeholder="Título do seu quizz">
@@ -110,98 +111,138 @@
 				<button class="next create-question">Prosseguir para criar perguntas</button>
 			</section>
 		</div>
+		<!-- create question form-->
 
+		<!-- create question answers form-->
 		<div>
-			<section class="questions-quizz">
+			<section class="form questions-quizz">
 				<h1>Crie suas perguntas</h1>
 
-				<form action="" id="question1">	
-					<div class="question">
+				<!-- toggle question 1 -->
+				<div class="hidden">
+					<section class="question-toggle">
 						<span>Pergunta 1</span>
-						<input type="text" placeholder="Texto da pergunta">
-						<input type="text" placeholder="Cor de fundo da pergunta">
-					</div>
-					<div class="question corrrect-answer">
-						<span>Resposta correta</span>
-						<input type="text" placeholder="Resposta correta">
-						<input type="text" placeholder="URL da imagem">
-					</div>
-					<div class="question incorrect-answers">
-						<span>Respostas incorretas</span>
-						<div>
-							<input type="text" placeholder="Resposta incorreta 1">
+						<ion-icon name="create-outline"></ion-icon>
+					</section>
+				</div>
+				<!-- toggle question 1-->
+				<!-- question 1 form-->
+				<div>
+					<form action="" id="question1" class="hidden">	
+						<div class="question">
+							<span>Pergunta 1</span>
+							<input type="text" placeholder="Texto da pergunta">
+							<input type="text" placeholder="Cor de fundo da pergunta">
+						</div>
+						<div class="question corrrect-answer">
+							<span>Resposta correta</span>
+							<input type="text" placeholder="Resposta correta">
 							<input type="text" placeholder="URL da imagem">
 						</div>
-						<div>
-							<input type="text" placeholder="Resposta incorreta 2">
-							<input type="text" placeholder="URL da imagem">
+						<div class="question incorrect-answers">
+							<span>Respostas incorretas</span>
+							<div>
+								<input type="text" placeholder="Resposta incorreta 1">
+								<input type="text" placeholder="URL da imagem">
+							</div>
+							<div>
+								<input type="text" placeholder="Resposta incorreta 2">
+								<input type="text" placeholder="URL da imagem">
+							</div>
+							<div>
+								<input type="text" placeholder="Resposta incorreta 3">
+								<input type="text" placeholder="URL da imagem">
+							</div>
 						</div>
-						<div>
-							<input type="text" placeholder="Resposta incorreta 3">
-							<input type="text" placeholder="URL da imagem">
-						</div>
-					</div>
-				</form>
+					</form>
+				</div>
+				<!-- question 1 form-->
 
-				<form action="" id="question2">	
-					<div class="question">
+				<!-- toggle question 2-->
+				<div>
+					<section class="question-toggle">
 						<span>Pergunta 2</span>
-						<input type="text" placeholder="Texto da pergunta">
-						<input type="text" placeholder="Cor de fundo da pergunta">
-					</div>
-					<div class="question corrrect-answer">
-						<span>Resposta correta</span>
-						<input type="text" placeholder="Resposta correta">
-						<input type="text" placeholder="URL da imagem">
-					</div>
-					<div class="question incorrect-answers">
-						<span>Respostas incorretas</span>
-						<div>
-							<input type="text" placeholder="Resposta incorreta 1">
+						<ion-icon name="create-outline"></ion-icon>
+					</section>
+				</div>
+				<!-- toggle question 2-->
+				<!-- question 2 form-->
+				<div class="hidden">
+					<form action="" id="question2">	
+						<div class="question">
+							<span>Pergunta 2</span>
+							<input type="text" placeholder="Texto da pergunta">
+							<input type="text" placeholder="Cor de fundo da pergunta">
+						</div>
+						<div class="question corrrect-answer">
+							<span>Resposta correta</span>
+							<input type="text" placeholder="Resposta correta">
 							<input type="text" placeholder="URL da imagem">
 						</div>
-						<div>
-							<input type="text" placeholder="Resposta incorreta 2">
-							<input type="text" placeholder="URL da imagem">
+						<div class="question incorrect-answers">
+							<span>Respostas incorretas</span>
+							<div>
+								<input type="text" placeholder="Resposta incorreta 1">
+								<input type="text" placeholder="URL da imagem">
+							</div>
+							<div>
+								<input type="text" placeholder="Resposta incorreta 2">
+								<input type="text" placeholder="URL da imagem">
+							</div>
+							<div>
+								<input type="text" placeholder="Resposta incorreta 3">
+								<input type="text" placeholder="URL da imagem">
+							</div>
 						</div>
-						<div>
-							<input type="text" placeholder="Resposta incorreta 3">
-							<input type="text" placeholder="URL da imagem">
-						</div>
-					</div>
-				</form>
+					</form>
+				</div>
+				<!-- question 2 form-->
 
-				<form action="" id="question3">	
-					<div class="question">
+				<!-- toggle question 3-->
+				<div>
+					<section class="question-toggle">
 						<span>Pergunta 3</span>
-						<input type="text" placeholder="Texto da pergunta">
-						<input type="text" placeholder="Cor de fundo da pergunta">
-					</div>
-					<div class="question corrrect-answer">
-						<span>Resposta correta</span>
-						<input type="text" placeholder="Resposta correta">
-						<input type="text" placeholder="URL da imagem">
-					</div>
-					<div class="question incorrect-answers">
-						<span>Respostas incorretas</span>
-						<div>
-							<input type="text" placeholder="Resposta incorreta 1">
+						<ion-icon name="create-outline"></ion-icon>
+					</section>
+				</div>
+				<!-- toggle question 3-->
+				<!-- question 3 form-->
+				<div class="hidden">
+					<form action="" id="question3">	
+						<div class="question">
+							<span>Pergunta 3</span>
+							<input type="text" placeholder="Texto da pergunta">
+							<input type="text" placeholder="Cor de fundo da pergunta">
+						</div>
+						<div class="question corrrect-answer">
+							<span>Resposta correta</span>
+							<input type="text" placeholder="Resposta correta">
 							<input type="text" placeholder="URL da imagem">
 						</div>
-						<div>
-							<input type="text" placeholder="Resposta incorreta 2">
-							<input type="text" placeholder="URL da imagem">
+						<div class="question incorrect-answers">
+							<span>Respostas incorretas</span>
+							<div>
+								<input type="text" placeholder="Resposta incorreta 1">
+								<input type="text" placeholder="URL da imagem">
+							</div>
+							<div>
+								<input type="text" placeholder="Resposta incorreta 2">
+								<input type="text" placeholder="URL da imagem">
+							</div>
+							<div>
+								<input type="text" placeholder="Resposta incorreta 3">
+								<input type="text" placeholder="URL da imagem">
+							</div>
 						</div>
-						<div>
-							<input type="text" placeholder="Resposta incorreta 3">
-							<input type="text" placeholder="URL da imagem">
-						</div>
-					</div>
-				</form>
+					</form>
+				</div>
+				<!-- question 3 form-->
 
 				<button class="next create-level">Prosseguir para criar níveis</button>
 			</section>
 		</div>
+		<!-- create question answers form-->
+
 	<!-- Third screen end -->
 
 
