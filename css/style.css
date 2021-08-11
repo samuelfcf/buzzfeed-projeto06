@@ -92,18 +92,14 @@ header h1 {
 	padding: 10px 20px;
 }
 
-.screen-1 .personal-quizzes {
+.screen-1 .personal-quizzes, .screen-1 .all-quizzes {
 	margin-top: 60px;
 }
 
 .screen-1 .personal-quizzes .title {
 	display: flex;
 	align-items: center;
-	gap: 20px;
-}
-
-.screen-1 .all-quizzes {
-	margin-top: 60px;
+	gap: 15px;
 }
 
 /* Second Screen */
