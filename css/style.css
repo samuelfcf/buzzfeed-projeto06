@@ -233,7 +233,6 @@ header h1 {
     border-radius: 5px;
     background-color: #EC362D;
     color: #FFFFFF;
-    font-size: 14px;
     font-weight: 500;
 }
 
@@ -377,4 +376,50 @@ header h1 {
 /* aux classes */
 .hidden {
     display: none;
+}
+
+@media (max-width: 1100px) {
+
+
+    /* Third Screen */
+    .screen-3 {
+        width: 100vw;
+        margin-top: 106px;
+    }
+
+    .screen-3 h1 {
+        margin-top: 0;
+    }
+
+    .screen-3 form input {
+        width: 341px;
+    }
+
+    .screen-3 .info-quizz button.create-question {
+        width: 325px;
+        border-radius: 14px;
+        margin-top: 29px;
+    }
+
+    .screen-3 .questions-quizz form {
+        padding-left: 0;
+    }
+
+    .screen-3 .questions-quizz section.question-toggle {
+        width: 100vw;
+    }
+
+    .screen-3 .questions-quizz button.create-level {
+        width: 325px;
+        margin-top: 35px;
+    }
+
+    .screen-3 .level-quizz section.level-toggle {
+        width: 100vw;
+    }
+
+    .screen-3 .quiz-is-ready img {
+        width: 340px;
+        height: 181px;
+    }
 }
