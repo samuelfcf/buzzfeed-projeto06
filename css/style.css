@@ -33,10 +33,10 @@ header h1 {
 /* First Screen */
 
 .screen-1 {
-	margin-top: 130px;
+	margin-top: 120px;
 }
 
-.screen-1 h2 {
+.screen-1 h3 {
 	font-size: 20px;
 	line-height: 23px;
 	font-weight: 700;
@@ -61,6 +61,7 @@ header h1 {
 	object-fit: cover;
 	width: 100%;
 	opacity: .95;
+	border-radius: 5px;
 }
 
 .screen-1 .quizz-list .quizz-description {
@@ -90,9 +91,17 @@ header h1 {
 	background-color: transparent;
 	border-radius: 50px;
 	padding: 10px 20px;
+	cursor: pointer;
+	transition: .3s ease-out;
 }
 
-.screen-1 .personal-quizzes, .screen-1 .all-quizzes {
+.screen-1 .create-initial-quizz button:hover {
+	color: white;
+	border: 1px solid #EC362D;
+	background-color: #EC362D;
+}
+
+.screen-1 .all-quizzes {
 	margin-top: 60px;
 }
 
@@ -103,12 +112,67 @@ header h1 {
 }
 
 /* Second Screen */
+.screen-2 .banner {
+	margin-top: 63px;
+	position: relative;
+}
 
+.screen-2 .banner img {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	filter: brightness(60%);
+}
 
+.screen-2 .banner h2 {
+	font-size: 39px;
+	line-height: 43px;
+	font-weight: 700;
+	position: absolute;
+	color: white;
+	top: calc((100% - 43px) / 2);
+	left: calc((100% - 466px) / 2);
+}
+
+.screen-2 .questions .container {
+	width: 750px;
+	margin-top: 60px;
+}
+
+.screen-2 .questions .question {
+	margin-bottom: 60px;
+	padding: 30px;
+	background-color: white;
+}
+
+.screen-2 .questions .question-command {
+	width: 100%;
+	background-color: #434CA0;
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.screen-2 .questions .question-command span {
+	display: inline-block;
+	padding: 60px 0;
+	color: white;
+}
+
+.screen-2 .questions .answers {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+}
+
+.screen-2 .questions .answers img {
+	display: block;
+	width: 337.5px;
+	margin-bottom: 15px;
+}
 
 /* screen 3*/
 .screen-3 {
-    margin-top: 75px;
+    margin-top: 63px;
 }
 
 .screen-3 .info-quizz {
