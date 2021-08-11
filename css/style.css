@@ -103,7 +103,7 @@ header h1 {
 }
 
 .screen-1 .all-quizzes {
-    margin-top: 60px;
+    margin: 60px 0;
 }
 
 .screen-1 .personal-quizzes .title {
@@ -130,9 +130,11 @@ header h1 {
     line-height: 43px;
     font-weight: 700;
     position: absolute;
-    color: white;
     top: calc((100% - 43px) / 2);
-    left: calc((100% - 466px) / 2);
+    left: calc((100% - 200px) / 2 - 20px);
+    color: white;
+    width: 240px;
+    text-align: center;
 }
 
 .screen-2 .questions .container {
@@ -163,6 +165,9 @@ header h1 {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
 }
 
 .screen-2 .questions .answers img {
@@ -379,7 +384,46 @@ header h1 {
 }
 
 @media (max-width: 1100px) {
+    .screen-1 .container, .screen-2 .questions .container {
+        width: 340px;
+    }
 
+    /* First screen */
+
+    .screen-1 .personal-quizzes .title {
+        justify-content: space-between;
+    }
+
+    /* Second screen */
+
+    .screen-2 .banner img {
+        height: 120px;
+    }
+
+    .screen-2 .banner h2 {
+        font-size: 19px;
+        line-height: 23px;
+        font-weight: 400;
+    }
+
+    .screen-2 .questions .container {
+        margin-top: 30px;
+    }
+
+    .screen-2 .questions .question {
+        padding: 5px;
+        margin-bottom: 30px;
+    }
+
+    .screen-2 .questions .answers {
+        font-size: 13px;
+        line-height: 16px;
+    }
+
+    .screen-2 .questions .answers img {
+        width: 157.5px;
+        margin-bottom: 5px;
+    }
 
     /* Third Screen */
     .screen-3 {
