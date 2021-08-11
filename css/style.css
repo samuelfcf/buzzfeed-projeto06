@@ -13,6 +13,8 @@ header {
 	width: 100%;
 	background-color: #EC362D;
 	color: white;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+	z-index: 100;
 }
 
 header h1 {
@@ -25,11 +27,47 @@ header h1 {
 
 .container {
 	margin: 0 auto;
-	width: 1100px;
+	width: 1051px;
 }
 
+/* First Screen */
+
 .screen-1 {
-	margin-top: 140px;
+	margin-top: 130px;
+}
+
+.screen-1 h2 {
+	font-size: 20px;
+	line-height: 23px;
+	font-weight: 700;
+}
+
+.screen-1 .quizz-list {
+	margin-top: 15px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+}
+
+.screen-1 .quizz-list li {
+	display: block;
+	position: relative;
+	width: 340px;
+	background: linear-gradient(to bottom, white, black);
+}
+
+.screen-1 .quizz-list img {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	opacity: .95;
+}
+
+.screen-1 .quizz-list .quizz-description {
+	position: absolute;
+	left: 15px;
+	bottom: 15px;
+	color: white;
 }
 
 .screen-1 .create-initial-quizz .container {
@@ -52,4 +90,82 @@ header h1 {
 	background-color: transparent;
 	border-radius: 50px;
 	padding: 10px 20px;
+}
+
+.screen-1 .personal-quizzes {
+	margin-top: 60px;
+}
+
+.screen-1 .personal-quizzes .title {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.screen-1 .all-quizzes {
+	margin-top: 60px;
+}
+
+/* Second Screen */
+
+
+
+/* screen 3*/
+.screen-3 {
+    margin-top: 75px;
+}
+
+.screen-3 .info-quizz {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen-3 .info-quizz h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.screen-3 .info-quizz form {
+    width: 600px;
+    height: 256px;
+    margin-top: 27px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.screen-3 .info-quizz form input {
+    width: 564px;
+    height: 46px;
+    border: 1px solid #D1D1D1;
+    border-radius: 3px;
+    padding-left: 20px;
+}
+
+.screen-3 .info-quizz form input::placeholder {
+    color: #D1D1D1;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.screen-3 .info-quizz button.create-question {
+    width: 370px;
+    height: 54px;
+    margin-top: 85px;
+    border: 0 none;
+    border-radius: 5px;
+    background-color: #EC362D;
+    color: #FFFFFF;
+}
+
+/* aux classes */
+.hidden {
+    display: none;
 }
