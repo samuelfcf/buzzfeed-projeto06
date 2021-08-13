@@ -189,27 +189,27 @@
 	<!-- Third screen start -->
 	<section class="screen-3 ">
 		<!-- create question form-->
-		<div class="">
+		<div class="screen3-1 hidden">
 			<section class="form info-quizz">
 				<h1>Comece pela começo</h1>
 				<form action="">
-					<input type="text" placeholder="Título do seu quizz">
-					<input type="text" placeholder="URL da imagem do seu quizz">
-					<input type="text" placeholder="Quantidade de perguntas do seu quizz">
-					<input type="text" placeholder="Quantidade de níveis do quizz">
+					<input type="text" placeholder="Título do seu quizz" class="quizz-title">
+					<input type="text" placeholder="URL da imagem do seu quizz" class="quizz-image-url">
+					<input type="text" placeholder="Quantidade de perguntas do seu quizz" class="quizz-qty-questions">
+					<input type="text" placeholder="Quantidade de níveis do quizz" class="quizz-level">
 				</form>
-				<button class="next create-question" onclick="get">Prosseguir para criar perguntas</button>
+				<button class="next create-question" onclick="saveQuizzInfoBasics()">Prosseguir para criar perguntas</button>
 			</section>
 		</div>
 		<!-- create question form-->
 
 		<!-- create question answers form-->
-		<div class="hidden">
+		<div class="screen3-2 ">
 			<section class="form questions-quizz">
 				<h1>Crie suas perguntas</h1>
 
 				<!-- question 1 toggle -->
-				<div class="">
+				<div onclick="openQuestionForm(this)">
 					<section class="question-toggle">
 						<span>Pergunta 1</span>
 						<img src="./img/icon-create.svg" alt="create-icon" class="create-icon">
@@ -217,7 +217,7 @@
 				</div>
 				<!-- question 1 toggle -->
 				<!-- question 1 form-->
-				<div class="hidden">
+				<div class="question1-form hidden">
 					<form action="" id="question1" class="hidden">	
 						<div class="question">
 							<span>Pergunta 1</span>
@@ -249,7 +249,7 @@
 				<!-- question 1 form-->
 
 				<!-- question 2 toggle -->
-				<div>
+				<div onclick="openQuestionForm(this)">
 					<section class="question-toggle">
 						<span>Pergunta 2</span>
 						<img src="./img/icon-create.svg" alt="create-icon" class="create-icon">
@@ -257,7 +257,7 @@
 				</div>
 				<!-- question 2 toggle -->
 				<!-- question 2 form-->
-				<div class="hidden">
+				<div class="question2-form hidden">
 					<form action="" id="question2">	
 						<div class="question">
 							<span>Pergunta 2</span>
@@ -289,7 +289,7 @@
 				<!-- question 2 form-->
 
 				<!-- question 3 toggle -->
-				<div>
+				<div onclick="openQuestionForm(this)">
 					<section class="question-toggle">
 						<span>Pergunta 3</span>
 						<img src="./img/icon-create.svg" alt="create-icon" class="create-icon">
@@ -297,7 +297,7 @@
 				</div>
 				<!-- question 3 toggle -->
 				<!-- question 3 form-->
-				<div class="hidden">
+				<div class="question3-form hidden">
 					<form action="" id="question3">	
 						<div class="question">
 							<span>Pergunta 3</span>
@@ -328,13 +328,53 @@
 				</div>
 				<!-- question 3 form-->
 
-				<button class="next create-level">Prosseguir para criar níveis</button>
+				<!-- question 4 toggle -->
+				<div onclick="openQuestionForm(this)">
+					<section class="question-toggle">
+						<span>Pergunta 4</span>
+						<img src="./img/icon-create.svg" alt="create-icon" class="create-icon">
+					</section>
+				</div>
+				<!-- question 4 toggle -->
+				<!-- question 4 form-->
+				<div class="question4-form hidden">
+					<form action="" id="question3">	
+						<div class="question">
+							<span>Pergunta 4</span>
+							<input type="text" placeholder="Texto da pergunta">
+							<input type="text" placeholder="Cor de fundo da pergunta">
+						</div>
+						<div class="question corrrect-answer">
+							<span>Resposta correta</span>
+							<input type="text" placeholder="Resposta correta">
+							<input type="text" placeholder="URL da imagem">
+						</div>
+						<div class="question incorrect-answers">
+							<span>Respostas incorretas</span>
+							<div>
+								<input type="text" placeholder="Resposta incorreta 1">
+								<input type="text" placeholder="URL da imagem">
+							</div>
+							<div>
+								<input type="text" placeholder="Resposta incorreta 2">
+								<input type="text" placeholder="URL da imagem">
+							</div>
+							<div>
+								<input type="text" placeholder="Resposta incorreta 3">
+								<input type="text" placeholder="URL da imagem">
+							</div>
+						</div>
+					</form>
+				</div>
+				<!-- question 4 form-->
+
+				<button class="next create-level" onclick="next()">Prosseguir para criar níveis</button>
 			</section>
 		</div>
 		<!-- create question answers form-->
 
 		<!-- create question level form-->
-		<div class="hidden">
+		<div class="screen3-3 hidden">
 			<section class="form level-quizz">
 				<h1>Agora, decida os níveis</h1>
 
@@ -410,7 +450,7 @@
 		<!-- create question level form-->
 
 		<!-- quizz is ready screen -->
-		<div class="hidden">
+		<div class="screen3-4 hidden">
 			<section class="quiz-is-ready">
 				<h1>Seu quizz está pronto!</h1>
 				<img src="img/image-test.jpg" alt="test">
