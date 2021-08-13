@@ -33,9 +33,9 @@ function putQuizzesOnPage (response) {
 	allQuizzesList.innerHTML = "";
 
 	for (let quizz of response.data) {
-		allQuizzesList.innerHTML += `<li class="quizz-item">
-			<img src="${quizz.image}" alt="A image about the quizz">
-			<span class="quizz-description">${quizz.title}</span>
+		allQuizzesList.innerHTML += `<li class="quizz-item">\
+			<img src="${quizz.image}" alt="A image about the quizz">\
+			<span class="quizz-description">${quizz.title}</span>\
 		</li>`;
 	}
 	console.log(response.data);
@@ -44,14 +44,51 @@ function putQuizzesOnPage (response) {
 function checkUserQuizzes (response) {
 	const personalQuizzList = document.querySelector(".personal-quizzes .quizz-list")
 
-	personalQuizzes.innerHTML = "";
+	personalQuizzList.innerHTML = "";
 
 	for (let quizz of response.data) {
 		if (quizz.id in userQuizzes) {
-			personalQuizzes.innerHTML += `<li class="quizz-item">
-				<img src="${quizz.image}" alt="">
-				<span class="quizz-description">${quizz.title}</span>
+			personalQuizzList.innerHTML += `<li class="quizz-item">\
+				<img src="${quizz.image}" alt="">\
+				<span class="quizz-description">${quizz.title}</span>\
 			</li>`
+		}
+	}
+}
+
+getQuizzQuestions()
+
+function getQuizzQuestions () {
+	const promisse = axios.get(URL_QUIZZES);
+	promisse.then(makeBanner);
+	promisse.then(putQuestionsOnPage);
+}
+
+function makeBanner (response) {
+	const test = response.data[0];
+	document.querySelector(".banner").innerHTML = `\
+		<img src="${test.image}" alt="A banner about the quizz">\
+		<h2>${test.title}</h2>`;
+}
+
+function putQuestionsOnPage (response) {
+	const questions = document.querySelector(".questions ul");
+	const test = response.data[0];
+
+	questions.innerHTML = "";
+
+	for (let question of test.questions) {
+		questions.innerHTML += `\
+		<div class="question-command">\
+			<span>${question.title}</span>\
+		</div>`;
+
+		for (let answer of question.answers) {
+			questions.innerHTML += `<ul class="answers">\
+				<li class="answer">\
+					<img src="${answer.image}" alt="Resposta">\
+					${answer.text}\
+				</li>`;
 		}
 	}
 }
