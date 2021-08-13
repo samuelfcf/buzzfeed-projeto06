@@ -54,15 +54,16 @@ header h1 {
     display: block;
     position: relative;
     width: 340px;
-    background: linear-gradient(to bottom, white, black);
 }
 
 .screen-1 .quizz-list img {
     display: block;
     object-fit: cover;
     width: 100%;
-    opacity: .95;
+    height: 180px;
     border-radius: 5px;
+    filter: brightness(60%);
+    cursor: pointer;
 }
 
 .screen-1 .quizz-list .quizz-description {
