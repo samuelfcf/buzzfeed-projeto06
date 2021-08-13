@@ -21,7 +21,7 @@
 	<!-- Header end -->
 
 	<!-- First screen start -->
-	<section class="screen-1 ">
+	<section class="screen-1 hidden">
 
 		<!-- Create quizzes start -->
 		<section class="create-initial-quizz">
@@ -187,9 +187,9 @@
 	<!-- Second screen end -->
 
 	<!-- Third screen start -->
-	<section class="screen-3 hidden">
+	<section class="screen-3 ">
 		<!-- create question form-->
-		<div class="hidden">
+		<div class="">
 			<section class="form info-quizz">
 				<h1>Comece pela começo</h1>
 				<form action="">
@@ -198,7 +198,7 @@
 					<input type="text" placeholder="Quantidade de perguntas do seu quizz">
 					<input type="text" placeholder="Quantidade de níveis do quizz">
 				</form>
-				<button class="next create-question">Prosseguir para criar perguntas</button>
+				<button class="next create-question" onclick="get">Prosseguir para criar perguntas</button>
 			</section>
 		</div>
 		<!-- create question form-->
@@ -334,7 +334,7 @@
 		<!-- create question answers form-->
 
 		<!-- create question level form-->
-		<div class="">
+		<div class="hidden">
 			<section class="form level-quizz">
 				<h1>Agora, decida os níveis</h1>
 
@@ -429,6 +429,9 @@
 
 	<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="js/screen1.js"></script>
+	<script src="js/screen2.js"></script>
+	<script src="js/screen3.js"></script>
 	<script src="js/script.js"></script>
 </body>
 
