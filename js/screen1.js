@@ -1,22 +1,51 @@
 const URL_QUIZZES = "https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/quizzes";
 
+let userQuizzes = [];
+
+const personalQuizzes = document.querySelector(".personal-quizzes");
+
 getQuizzes();
+
+function userQuizzesSection () {
+	const createQuizzSection = document.querySelector(".create-initial-quizz")
+	
+	if (userQuizzes > 0) {
+		createQuizzSection.classList.add("hidden");
+		personalQuizzes.classList.remove("hidden");
+	}
+}
 
 function getQuizzes() {
 	const promisse = axios.get(URL_QUIZZES);
 	promisse.then(putQuizzesOnPage);
+	promisse.then(checkUserQuizzes);
 }
 
 function putQuizzesOnPage (response) {
-	const quizzList = document.querySelector(".all-quizzes .quizz-list");
+	const allQuizzesList = document.querySelector(".all-quizzes .quizz-list");
 	
-	quizzList.innerHTML = "";
+	allQuizzesList.innerHTML = "";
 
-	for (quizz of response.data) {
-		quizzList.innerHTML += `<li class="quizz-item">
+	for (let quizz of response.data) {
+		allQuizzesList.innerHTML += `<li class="quizz-item">
 			<img src="${quizz.image}" alt="A image about the quizz">
 			<span class="quizz-description">${quizz.title}</span>
 		</li>`;
 	}
+	console.log(response.data);
 }
 
+function checkUserQuizzes (response) {
+	const personalQuizzList = document.querySelector(".personal-quizzes .quizz-list")
+
+	personalQuizzes.innerHTML = "";
+
+	for (let quizz of response.data) {
+		if (quizz.id in userQuizzes) {
+			personalQuizzes.innerHTML += `<li class="quizz-item">
+				<img src="${quizz.image}" alt="">
+				<span class="quizz-description">${quizz.title}</span>
+			</li>`
+		}
+	}
+}
