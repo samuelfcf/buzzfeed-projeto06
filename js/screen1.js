@@ -3,6 +3,12 @@ const URL_QUIZZES = "https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquiz
 let userQuizzes = [];
 
 const personalQuizzes = document.querySelector(".personal-quizzes");
+const createQuizzButton = document.querySelector(".create-quizz");
+
+createQuizzButton.addEventListener("click", () => {
+	document.querySelector(".screen-1").classList.add("hidden");
+	document.querySelector(".screen-3").classList.remove("hidden");
+});
 
 getQuizzes();
 
