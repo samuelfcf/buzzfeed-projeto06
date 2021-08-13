@@ -3,16 +3,22 @@ let numQuestionsRender;
 let numLevelsRender;
 
 // first screen
+function validateURL(url) {
+    const rule = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
+    return rule.test(url)
+}
+
 function saveQuizzInfoBasics() {
     let title = document.querySelector(".quizz-title").value;
     let urlImage = document.querySelector(".quizz-image-url").value;
     let qtyQuestions = Number(document.querySelector(".quizz-qty-questions").value);
     let levels = Number(document.querySelector(".quizz-level").value);
+    console.log(validateURL(urlImage));
 
     numQuestionsRender = qtyQuestions;
     numLevelsRender = levels;
 
-    if( (title.length < 20 || title.length > 65) || (typeof urlImage !== "string") ||(qtyQuestions < 3) || (levels < 2) ) {
+    if( (title.length < 20 || title.length > 65) || validateURL(urlImage) === false ||(qtyQuestions < 3) || (levels < 2) ) {
         alert("Falhou!")
     } else {
         renderCreateQuestionsSection();        
