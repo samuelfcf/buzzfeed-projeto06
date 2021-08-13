@@ -21,7 +21,7 @@
 	<!-- Header end -->
 
 	<!-- First screen start -->
-	<section class="screen-1">
+	<section class="screen-1 hidden">
 
 		<!-- Create quizzes start -->
 		<section class="create-initial-quizz">
@@ -57,13 +57,11 @@
 	<!-- First screen end -->
 
 	<!-- Second screen start -->
-	<section class="screen-2 hidden">
+	<section class="screen-2">
 		<div class="banner"></div>
 
-		<div class="questions">
-			<div class="container">
-				<ul></ul>
-			</div>
+		<div class="container">
+			<ul class="questions"></ul>
 		</div>
 	</section>
 	<!-- Second screen end -->
@@ -80,7 +78,8 @@
 					<input type="text" placeholder="Quantidade de perguntas do seu quizz" class="quizz-qty-questions">
 					<input type="text" placeholder="Quantidade de níveis do quizz" class="quizz-level">
 				</form>
-				<button class="next create-question" onclick="saveQuizzInfoBasics()">Prosseguir para criar perguntas</button>
+				<button class="next create-question" onclick="saveQuizzInfoBasics()">Prosseguir para criar
+					perguntas</button>
 			</section>
 		</div>
 		<!-- create question form-->
@@ -100,7 +99,7 @@
 				<!-- question 1 toggle -->
 				<!-- question 1 form-->
 				<div class="question1-form hidden">
-					<form action="" id="question1" class="hidden">	
+					<form action="" id="question1" class="hidden">
 						<div class="question">
 							<span>Pergunta 1</span>
 							<input type="text" placeholder="Texto da pergunta">
@@ -140,7 +139,7 @@
 				<!-- question 2 toggle -->
 				<!-- question 2 form-->
 				<div class="question2-form hidden">
-					<form action="" id="question2">	
+					<form action="" id="question2">
 						<div class="question">
 							<span>Pergunta 2</span>
 							<input type="text" placeholder="Texto da pergunta">
@@ -180,7 +179,7 @@
 				<!-- question 3 toggle -->
 				<!-- question 3 form-->
 				<div class="question3-form hidden">
-					<form action="" id="question3">	
+					<form action="" id="question3">
 						<div class="question">
 							<span>Pergunta 3</span>
 							<input type="text" placeholder="Texto da pergunta">
@@ -220,7 +219,7 @@
 				<!-- question 4 toggle -->
 				<!-- question 4 form-->
 				<div class="question4-form hidden">
-					<form action="" id="question3">	
+					<form action="" id="question3">
 						<div class="question">
 							<span>Pergunta 4</span>
 							<input type="text" placeholder="Texto da pergunta">
@@ -269,7 +268,7 @@
 				</div>
 				<!-- level 1 toggle -->
 				<!-- level 1 form -->
-				<div class="hidden">  
+				<div class="hidden">
 					<form action="" id="level1">
 						<div class="level">
 							<span>Nível 1</span>
@@ -343,7 +342,7 @@
 			</section>
 		</div>
 		<!-- quizz is ready screen -->
-	</section>	
+	</section>
 
 
 	<!-- Third screen end -->
