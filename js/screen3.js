@@ -1,29 +1,30 @@
 let quizz = {}
+let idQuizz;
 let numQuestionsRender;
 let numLevelsRender;
 
 // first screen
-function validateURL(url) {
+const validateURL = (url) => {
     const rule = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
     return rule.test(url)
 }
 
-function isHexCodeColor(color) {
+const isHexCodeColor = (color) => {
     const rule = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i;
     return rule.test(color);
 }
 
-function nextPage(currentPage, nextPage) {
+const nextPage = (currentPage, nextPage) => {
     document.querySelector(`.screen3-${currentPage}`).classList.add("hidden");
     document.querySelector(`.screen3-${nextPage}`).classList.remove("hidden");
 }
 
-function saveQuizzInfoBasics() {
+const saveQuizzInfoBasics = () => {
     const title = document.querySelector(".quizz-title").value;
     const urlImage = document.querySelector(".quizz-image-url").value;
     const qtyQuestions = Number(document.querySelector(".quizz-qty-questions").value);
     const levels = Number(document.querySelector(".quizz-level").value);
-    console.log(title,urlImage, qtyQuestions, levels);  
+
     numQuestionsRender = qtyQuestions;
     numLevelsRender = levels;
 
@@ -41,7 +42,7 @@ function saveQuizzInfoBasics() {
     }
 }
 
-function renderCreateQuestionsSection() {
+const renderCreateQuestionsSection = () => {
     const questionsQuizz = document.querySelector(".questions-quizz");
     questionsQuizz.innerHTML = `
         <h1>Crie suas perguntas</h1>
@@ -92,7 +93,7 @@ function renderCreateQuestionsSection() {
 }
 
 // second screen
-function openQuestionForm(element) {
+const openQuestionForm = (element) => {
     element.classList.toggle("hidden");
     const question = element.querySelector("span").innerHTML;
 
@@ -113,7 +114,7 @@ function openQuestionForm(element) {
 }
 
 // trird screen
-function questionInfo(question) {
+const questionInfo = (question) => {
     const qTitle = document.querySelector(`#q${question}-text`).value;
     const qColor = document.querySelector(`#q${question}-color`).value;
 
@@ -166,7 +167,6 @@ function questionInfo(question) {
             isCorrectAnswer: false
         }
 
-    
         answers.push(answer1, answer2, answer3, answer4);
     
         const objQuestion = {
@@ -176,20 +176,18 @@ function questionInfo(question) {
         }
     
         quizz.questions.push(objQuestion);
-        nextPage(2,3);
     }    
-    
     
 }
 
-function getAllQuestionsInfo() {
+const getAllQuestionsInfo = () => {
     for(let i=0; i<numQuestionsRender; i++) {
         questionInfo(i+1);
         console.log(quizz)
     }
 }
 
-function renderLevelConfigSection() {
+const renderLevelConfigSection = () => {
     const levelsQuizz = document.querySelector(".level-quizz");
     levelsQuizz.innerHTML = `
         <h1>Agora, decida os níveis</h1>
@@ -218,9 +216,10 @@ function renderLevelConfigSection() {
     }
 
     levelsQuizz.innerHTML += `<button class="next submit-quizz" onclick="getAllLevelsInfo()">Finalizar Quizz</button>`
+    nextPage(2,3)
 }
 
-function openLevelForm(element) {
+const openLevelForm = (element) => {
     element.classList.toggle("hidden");
     const level = element.querySelector("span").innerHTML;
 
@@ -237,7 +236,7 @@ function openLevelForm(element) {
     }
 }
 
-function levelInfo(level) {
+const levelInfo = (level) => {
     const lTitle = document.querySelector(`#l${level}-title`).value;
     const lPercent = Number(document.querySelector(`#l${level}-percent`).value);
     const lURlImage = document.querySelector(`#l${level}-url-image`).value;
@@ -263,7 +262,7 @@ function levelInfo(level) {
     }
 }
 
-function getAllLevelsInfo() {
+const getAllLevelsInfo = () => {
     for(let i=0; i<numLevelsRender; i++) {
         levelInfo(i+1);
         console.log(quizz);
@@ -272,7 +271,7 @@ function getAllLevelsInfo() {
     sendQuizzToServer();
 }
 
-function renderQuizzImage() {
+const renderQuizzImage = () => {
     console.log(document.querySelector(".quiz-is-ready img"))
     document.querySelector(".quiz-is-ready img").src = quizz.image
 }
@@ -283,7 +282,8 @@ const sendQuizzToServer = () => {
 
 
     axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/quizzes", objRequest)
-        .then(() => {
+        .then((response) => {
+            idQuizz = response.data.id;
             renderQuizzImage();
             nextPage(3,4);
         })
@@ -294,4 +294,9 @@ const sendQuizzToServer = () => {
 
 const backToHome = () => {
    window.location.reload();
+}
+
+const accessQuizz = () => {
+    document.querySelector(".screen-3").classList.add("hidden");
+    getQuizzQuestions(idQuizz);
 }
