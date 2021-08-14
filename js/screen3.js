@@ -1,10 +1,5 @@
-let quizz = {
-    title: "title",
-    image: "urlImage",
-    questions: new Array(3),
-    levels: new Array(2)
-}
-let numQuestionsRender=2;
+let quizz = {}
+let numQuestionsRender;
 let numLevelsRender;
 
 // first screen
@@ -35,16 +30,14 @@ function saveQuizzInfoBasics() {
         quizz = {
             title: title,
             image: urlImage,
-            questions: new Array(qtyQuestions),
-            levels: new Array(levels)
+            questions: [],
+            levels: []
         }
         console.log(quizz);
     }
 }
 
 function renderCreateQuestionsSection() {
-    document.querySelector(".screen3-1").classList.add("hidden")
-
     const questionsQuizz = document.querySelector(".questions-quizz");
     questionsQuizz.innerHTML = `
         <h1>Crie suas perguntas</h1>
@@ -52,14 +45,46 @@ function renderCreateQuestionsSection() {
     for (let i=0; i < numQuestionsRender; i++) {
         questionsQuizz.innerHTML += `
         <div onclick="openQuestionForm(this)">
-        <section class="question-toggle">
-            <span>Pergunta ${i+1}</span>
-            <img src="./img/icon-create.svg" alt="create-icon" class="create-icon">
-        </section>
-    </div>
+            <section class="question-toggle">
+                <span>Pergunta ${i+1}</span>
+                <img src="./img/icon-create.svg" alt="create-icon" class="create-icon">
+            </section>
+        </div>
+        <div class="question${i+1}-form hidden">
+            <form action="" id="question${i+1}" class="hidden">
+                <div class="question">
+                    <span>Pergunta ${i+1}</span>
+                    <input id="q${i+1}-text" type="text" placeholder="Texto da pergunta">
+                    <input id="q${i+1}-color" type="text" placeholder="Cor de fundo da pergunta">
+                </div>
+                <div class="correct-answer">
+                    <span>Resposta correta</span>
+                    <input id="q${i+1}-correct-answer" type="text" placeholder="Resposta correta">
+                    <input id="q${i+1}-urlimage-correct-answer" type="text" placeholder="URL da imagem">
+                </div>
+                <div class="incorrect-answers">
+                    <span>Respostas incorretas</span>
+                    <div>
+                        <input id="q${i+1}-incorrect-answer1" type="text" placeholder="Resposta incorreta 1">
+                        <input id="q${i+1}-urlimage-incorrect-answer1" type="text" placeholder="URL da imagem">
+                    </div>
+                    <div>
+                        <input id="q${i+1}-incorrect-answer2" type="text" placeholder="Resposta incorreta 2">
+                        <input id="q${i+1}-urlimage-incorrect-answer2" type="text" placeholder="URL da imagem">
+                    </div>
+                    <div>
+                        <input id="q${i+1}-incorrect-answer3" type="text" placeholder="Resposta incorreta 3">
+                        <input id="q${i+1}-urlimage-incorrect-answer3" type="text" placeholder="URL da imagem">
+                    </div>
+                </div>
+            </form>
+        </div>
         `
+        
     }
-    document.querySelector(".screen3-2").classList.remove("hidden");
+    questionsQuizz.innerHTML += `<button class="next create-level" onclick="getAllQuestionsInfo()">Prosseguir para criar níveis</button>`
+    
+    nextPage(1,2);
 }
 
 // second screen
@@ -84,9 +109,9 @@ function openQuestionForm(element) {
 }
 
 // trird screen
-function next() {
-    document.querySelector(".screen3-2").classList.add("hidden");
-    document.querySelector(".screen3-3").classList.remove("hidden");
+function nextPage(currentPage, nextPage) {
+    document.querySelector(`.screen3-${currentPage}`).classList.add("hidden");
+    document.querySelector(`.screen3-${nextPage}`).classList.remove("hidden");
 }
 
 function questionInfo(question) {
@@ -116,6 +141,7 @@ function questionInfo(question) {
         }
      
     else {
+        renderLevelConfigSection();
         const answer1 = {
             text: qCorrectAnswer,
             image: qCorrectAnswerURLImage,
@@ -151,7 +177,7 @@ function questionInfo(question) {
         quizz.questions.push(objQuestion);
     }    
     
-    
+    nextPage(2,3);
 }
 
 function getAllQuestionsInfo() {
@@ -161,3 +187,87 @@ function getAllQuestionsInfo() {
     }
 }
 
+function renderLevelConfigSection() {
+    const levelsQuizz = document.querySelector(".level-quizz");
+    levelsQuizz.innerHTML = `
+        <h1>Agora, decida os níveis</h1>
+    `;
+
+    for (let i=0; i < numLevelsRender; i++) {
+        levelsQuizz.innerHTML += `
+        <div onclick="openLevelForm(this)">
+            <section class="level-toggle">
+                <span>Nível ${i+1}</span>
+                <img src="./img/icon-create.svg" alt="create-icon" class="create-icon">
+            </section>
+        </div>
+        <div class="level${i+1}-form hidden">
+            <form action="" class="level${i+1} hidden">
+                <div class="level">
+                    <span>Nível ${i+1}</span>
+                    <input id="l${i+1}-title" type="text" placeholder="Título do nível">
+                    <input id="l${i+1}-percent" type="text" placeholder="% de acerto mínima">
+                    <input id="l${i+1}-url-image" type="text" placeholder="URL da imagem do nível">
+                    <input id="l${i+1}-description" type="text" placeholder="Descrição do nível">
+                </div>
+            </form>
+        </div> 
+        `
+    }
+
+    levelsQuizz.innerHTML += `<button class="next submit-quizz" onclick="getAllLevelsInfo()">Finalizar Quizz</button>`
+}
+renderLevelConfigSection();
+function openLevelForm(element) {
+    element.classList.toggle("hidden");
+    const level = element.querySelector("span").innerHTML;
+
+    switch (level) {
+        case "Nível 1":
+            document.querySelector(".level1-form").classList.remove("hidden");
+            break;
+        case "Nível 2":
+            document.querySelector(".level2-form").classList.remove("hidden");
+            break;    
+        case "Nível 3":
+            document.querySelector(".level3-form").classList.remove("hidden");
+            break;
+    }
+}
+
+function levelInfo(level) {
+    const lTitle = document.querySelector(`#l${level}-title`).value;
+    const lPercent = Number(document.querySelector(`#l${level}-percent`).value);
+    const lURlImage = document.querySelector(`#l${level}-url-image`).value;
+    const lText = document.querySelector(`#l${level}-description`).value;
+
+    if( (lTitle.length < 10) || 
+        (lPercent <= 0 && lPercent >=100 ) || 
+        (validateURL(lURlImage) === false) ||
+        (lText.length < 30) )
+        {
+            alert("falhou!!!");
+        }
+
+    else {
+        const objLevel = {
+            title: lTitle,
+            image: lURlImage,
+            text: lText,
+            minValue: lPercent
+        }
+    
+        quizz.levels.push(objLevel);
+    }
+    
+    nextPage(3,4)
+
+}
+
+
+function getAllLevelsInfo() {
+    for(let i=0; i<numLevelsRender; i++) {
+        levelInfo(i+1);
+        console.log(quizz);
+    }
+}
