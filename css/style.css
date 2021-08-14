@@ -180,6 +180,7 @@ header h1 {
 	line-height: 24px;
 	font-weight: 700;
 	cursor: pointer;
+	word-wrap: break-word;
 }
 
 .screen-2 .questions .answers img {
@@ -414,8 +415,17 @@ header h1 {
 	}
 
 	/* First screen */
+	.screen-1 h3 {
+		margin-left: 15px;
+	}
+
 	.screen-1 .personal-quizzes .title {
 		justify-content: space-between;
+	}
+
+	.screen-1 .quizz-list {
+		flex-flow: column;
+		align-items: center;
 	}
 
 	/* Second screen */

@@ -34,9 +34,16 @@ function putQuizzesOnPage (response) {
 
 	for (let quizz of response.data) {
 		allQuizzesList.innerHTML += `<li class="quizz-item">\
-			<img src="${quizz.image}" alt="A image about the quizz">\
+			<img id="all-${quizz.id}" src="${quizz.image}" alt="A image about the quizz">\
 			<span class="quizz-description">${quizz.title}</span>\
 		</li>`;
+	}
+
+	for (let quizz of allQuizzesList.children) {		
+		quizz.addEventListener("click", event => {
+			quizzID = Number(event.target.id.substr(4));
+			getQuizzQuestions(quizzID);
+		});
 	}
 }
 
