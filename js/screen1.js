@@ -38,7 +38,6 @@ function putQuizzesOnPage (response) {
 			<span class="quizz-description">${quizz.title}</span>\
 		</li>`;
 	}
-	console.log(response.data);
 }
 
 function checkUserQuizzes (response) {
