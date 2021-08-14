@@ -1,51 +1,62 @@
-getQuizzQuestions();
-
-function getQuizzQuestions() {
+function getQuizzQuestions(quizzID) {
 	const promisse = axios.get(URL_QUIZZES);
-	promisse.then(makeBanner);
-	promisse.then(putQuestionsOnPage);
+	promisse.then(response => {
+		document.querySelector(".screen-1").classList.add("hidden");
+		document.querySelector(".screen-2").classList.remove("hidden");
+		makeBanner(response, quizzID);
+		putQuestionsOnPage(response, quizzID);
+	});
 }
 
-function makeBanner(response) {
-	const test = response.data[response.data.length - 1];
-	document.querySelector(".banner").innerHTML = `\
-		<img src="${test.image}" alt="A banner about the quizz">\
-		<h2>${test.title}</h2>`;
-}
-
-function putQuestionsOnPage(response) {
-	const questions = document.querySelector(".questions");
-	const test = response.data[response.data.length - 1];
-	let answers = "";
-
-	questions.innerHTML = "";
-
-	for (let question of test.questions) {
-
-		question.answers.sort(() => Math.random() - 0.5);
-
-		for (let answer of question.answers) {
-			answers += `<li class="answer" onclick="selectAnswer(this);">\
-				<img src="${answer.image}" alt="Resposta">\
-				${answer.text}\
-			</li>`;
+function makeBanner(response, quizzID) {
+	for (let quizz of response.data) {
+		if (quizz.id === quizzID) {
+			document.querySelector(".banner").innerHTML = `\
+			<img src="${quizz.image}" alt="A banner about the quizz">\
+			<h2>${quizz.title}</h2>`;
+			break;
 		}
+	}
+}
 
-		questions.innerHTML += `<li class="question">\
-			<div style="background-color: ${question.color};" class="question-command">\
-				<span>${question.title}</span>\
-			</div>\
-			<ul class="answers">${answers}</ul>\
-		</li>`;
+function putQuestionsOnPage(response, quizzID) {
+	for (let quizz of response.data) {
+		if (quizz.id === quizzID) {
+			const questions = document.querySelector(".questions");
 
-		answers = "";
+			let answers = "";
+		
+			questions.innerHTML = "";
+		
+			for (let question of quizz.questions) {
+		
+				question.answers.sort(() => Math.random() - 0.5);
+		
+				for (let answer of question.answers) {
+					answers += `<li class="answer" onclick="selectAnswer(this);">\
+						<img src="${answer.image}" alt="Resposta">\
+						${answer.text}\
+					</li>`;
+				}
+		
+				questions.innerHTML += `<li class="question">\
+					<div style="background-color: ${quizz.color};" class="question-command">\
+						<span>${quizz.title}</span>\
+					</div>\
+					<ul class="answers">${answers}</ul>\
+				</li>`;
+		
+				answers = "";
+			}
+			break;
+		}
 	}
 }
 
 function selectAnswer (item) {
 	if (!item.classList.contains("active") && !item.classList.contains("other")) {
 		item.classList.add("active");
-		console.log("oi")
+
 		const answers = item.parentNode;
 		
 		for (let child of answers.children) {
