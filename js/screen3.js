@@ -11,19 +11,23 @@ function validateURL(url) {
 function isHexCodeColor(color) {
     const rule = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i;
     return rule.test(color);
-}  
+}
+
+function nextPage(currentPage, nextPage) {
+    document.querySelector(`.screen3-${currentPage}`).classList.add("hidden");
+    document.querySelector(`.screen3-${nextPage}`).classList.remove("hidden");
+}
 
 function saveQuizzInfoBasics() {
-    let title = document.querySelector(".quizz-title").value;
-    let urlImage = document.querySelector(".quizz-image-url").value;
-    let qtyQuestions = Number(document.querySelector(".quizz-qty-questions").value);
-    let levels = Number(document.querySelector(".quizz-level").value);
-    console.log(validateURL(urlImage));
+    const title = document.querySelector(".quizz-title").value;
+    const urlImage = document.querySelector(".quizz-image-url").value;
+    const qtyQuestions = Number(document.querySelector(".quizz-qty-questions").value);
+    const levels = Number(document.querySelector(".quizz-level").value);
 
     numQuestionsRender = qtyQuestions;
     numLevelsRender = levels;
 
-    if( (title.length < 20 || title.length > 65) || validateURL(urlImage) === false ||(qtyQuestions < 3) || (levels < 2) ) {
+    if( (title.length < 20 || title.length > 65) || validateURL(urlImage) === false || (qtyQuestions < 3) || (levels < 2) ) {
         alert("Falhou!")
     } else {
         renderCreateQuestionsSection();        
@@ -54,19 +58,19 @@ function renderCreateQuestionsSection() {
             <form action="" id="question${i+1}" class="hidden">
                 <div class="question">
                     <span>Pergunta ${i+1}</span>
-                    <input id="q${i+1}-text" type="text" placeholder="Texto da pergunta">
-                    <input id="q${i+1}-color" type="text" placeholder="Cor de fundo da pergunta">
+                    <input id="q${i+1}-text" type="text" placeholder="Texto da pergunta" required>
+                    <input id="q${i+1}-color" type="text" placeholder="Cor de fundo da pergunta" required>
                 </div>
                 <div class="correct-answer">
                     <span>Resposta correta</span>
-                    <input id="q${i+1}-correct-answer" type="text" placeholder="Resposta correta">
-                    <input id="q${i+1}-urlimage-correct-answer" type="text" placeholder="URL da imagem">
+                    <input id="q${i+1}-correct-answer" type="text" placeholder="Resposta correta" required>
+                    <input id="q${i+1}-urlimage-correct-answer" type="text" placeholder="URL da imagem" required>
                 </div>
                 <div class="incorrect-answers">
                     <span>Respostas incorretas</span>
                     <div>
-                        <input id="q${i+1}-incorrect-answer1" type="text" placeholder="Resposta incorreta 1">
-                        <input id="q${i+1}-urlimage-incorrect-answer1" type="text" placeholder="URL da imagem">
+                        <input id="q${i+1}-incorrect-answer1" type="text" placeholder="Resposta incorreta 1" required>
+                        <input id="q${i+1}-urlimage-incorrect-answer1" type="text" placeholder="URL da imagem" required>
                     </div>
                     <div>
                         <input id="q${i+1}-incorrect-answer2" type="text" placeholder="Resposta incorreta 2">
@@ -109,11 +113,6 @@ function openQuestionForm(element) {
 }
 
 // trird screen
-function nextPage(currentPage, nextPage) {
-    document.querySelector(`.screen3-${currentPage}`).classList.add("hidden");
-    document.querySelector(`.screen3-${nextPage}`).classList.remove("hidden");
-}
-
 function questionInfo(question) {
     const qTitle = document.querySelector(`#q${question}-text`).value;
     const qColor = document.querySelector(`#q${question}-color`).value;
@@ -142,6 +141,7 @@ function questionInfo(question) {
      
     else {
         renderLevelConfigSection();
+
         const answer1 = {
             text: qCorrectAnswer,
             image: qCorrectAnswerURLImage,
@@ -217,7 +217,7 @@ function renderLevelConfigSection() {
 
     levelsQuizz.innerHTML += `<button class="next submit-quizz" onclick="getAllLevelsInfo()">Finalizar Quizz</button>`
 }
-renderLevelConfigSection();
+
 function openLevelForm(element) {
     element.classList.toggle("hidden");
     const level = element.querySelector("span").innerHTML;
@@ -264,10 +264,32 @@ function levelInfo(level) {
 
 }
 
-
 function getAllLevelsInfo() {
     for(let i=0; i<numLevelsRender; i++) {
         levelInfo(i+1);
         console.log(quizz);
     }
+
+    sendQuizzToServer();
 }
+
+function renderQuizzImage() {
+    console.log(document.querySelector(".quiz-is-ready img"))
+    document.querySelector(".quiz-is-ready img").src = quizz.image
+}
+
+const sendQuizzToServer = () => {
+    
+    const objRequest = quizz;
+
+
+    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/quizzes", objRequest)
+        .then(() => {
+            renderQuizzImage();
+            nextPage(3,4);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
