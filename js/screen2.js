@@ -1,4 +1,4 @@
-getQuizzQuestions()
+getQuizzQuestions();
 
 function getQuizzQuestions() {
 	const promisse = axios.get(URL_QUIZZES);
@@ -22,8 +22,10 @@ function putQuestionsOnPage(response) {
 
 	for (let question of test.questions) {
 
+		question.answers.sort(() => Math.random() - 0.5);
+
 		for (let answer of question.answers) {
-			answers += `<li class="answer">\
+			answers += `<li class="answer" onclick="selectAnswer(this);">\
 				<img src="${answer.image}" alt="Resposta">\
 				${answer.text}\
 			</li>`;
@@ -40,3 +42,16 @@ function putQuestionsOnPage(response) {
 	}
 }
 
+function selectAnswer (item) {
+	if (!item.classList.contains("active") && !item.classList.contains("other")) {
+		item.classList.add("active");
+		console.log("oi")
+		const answers = item.parentNode;
+		
+		for (let child of answers.children) {
+			if (!child.classList.contains("active")) {
+				child.classList.add("other");
+			}
+		}
+	}
+}
