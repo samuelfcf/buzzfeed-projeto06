@@ -23,7 +23,7 @@ function saveQuizzInfoBasics() {
     const urlImage = document.querySelector(".quizz-image-url").value;
     const qtyQuestions = Number(document.querySelector(".quizz-qty-questions").value);
     const levels = Number(document.querySelector(".quizz-level").value);
-
+    console.log(title,urlImage, qtyQuestions, levels);  
     numQuestionsRender = qtyQuestions;
     numLevelsRender = levels;
 
@@ -122,7 +122,7 @@ function questionInfo(question) {
 
     const qIncorrectAnswer1 = document.querySelector(`#q${question}-incorrect-answer1`).value;
     const qIncorrectAnswer1_URLImage = document.querySelector(`#q${question}-urlimage-incorrect-answer1`).value;
-
+    
     const qIncorrectAnswer2 = document.querySelector(`#q${question}-incorrect-answer2`).value;
     const qIncorrectAnswer2_URLImage = document.querySelector(`#q${question}-urlimage-incorrect-answer2`).value;
 
@@ -165,6 +165,7 @@ function questionInfo(question) {
             image: qIncorrectAnswer3_URLImage,
             isCorrectAnswer: false
         }
+
     
         answers.push(answer1, answer2, answer3, answer4);
     
@@ -175,9 +176,10 @@ function questionInfo(question) {
         }
     
         quizz.questions.push(objQuestion);
+        nextPage(2,3);
     }    
     
-    nextPage(2,3);
+    
 }
 
 function getAllQuestionsInfo() {
@@ -259,9 +261,6 @@ function levelInfo(level) {
     
         quizz.levels.push(objLevel);
     }
-    
-    nextPage(3,4)
-
 }
 
 function getAllLevelsInfo() {
@@ -293,3 +292,6 @@ const sendQuizzToServer = () => {
         });
 }
 
+const backToHome = () => {
+   window.location.reload();
+}
