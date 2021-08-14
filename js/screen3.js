@@ -115,6 +115,10 @@ const openQuestionForm = (element) => {
 
 // trird screen
 const questionInfo = (question) => {
+    let haveAnswer3 = false;
+    let haveAnswer4 = false;
+    let answers = [];
+
     const qTitle = document.querySelector(`#q${question}-text`).value;
     const qColor = document.querySelector(`#q${question}-color`).value;
 
@@ -124,21 +128,35 @@ const questionInfo = (question) => {
     const qIncorrectAnswer1 = document.querySelector(`#q${question}-incorrect-answer1`).value;
     const qIncorrectAnswer1_URLImage = document.querySelector(`#q${question}-urlimage-incorrect-answer1`).value;
     
-    const qIncorrectAnswer2 = document.querySelector(`#q${question}-incorrect-answer2`).value;
-    const qIncorrectAnswer2_URLImage = document.querySelector(`#q${question}-urlimage-incorrect-answer2`).value;
-
-    const qIncorrectAnswer3 = document.querySelector(`#q${question}-incorrect-answer3`).value;
-    const qIncorrectAnswer3_URLImage = document.querySelector(`#q${question}-urlimage-incorrect-answer3`).value;
-
-    let answers = [];
-
-    if( (qTitle.length < 20) || 
-        (isHexCodeColor(qColor) === false) || 
-        (qCorrectAnswer === '' || qIncorrectAnswer1 === '' || qIncorrectAnswer2 === '' || qIncorrectAnswer3 === '') ||
-        (validateURL(qCorrectAnswerURLImage) === false || validateURL(qIncorrectAnswer1_URLImage) === false || validateURL(qIncorrectAnswer2_URLImage) === false || validateURL(qIncorrectAnswer3_URLImage) === false) )
-        {
-            alert("falhou!!!");
+    if (document.querySelector(`#q${question}-incorrect-answer2`).value !== ''
+       && document.querySelector(`#q${question}-urlimage-incorrect-answer2`).value !== ''     
+    ) {
+        haveAnswer3 = true;
+        const qIncorrectAnswer2 = document.querySelector(`#q${question}-incorrect-answer2`).value;
+        const qIncorrectAnswer2_URLImage = document.querySelector(`#q${question}-urlimage-incorrect-answer2`).value;
+        if(qIncorrectAnswer2 === '' || validateURL(qIncorrectAnswer2_URLImage) === false) {
+            alert("Falhou!!!")
         }
+    }
+
+    if (document.querySelector(`#q${question}-incorrect-answer3`).value !== ''
+       && document.querySelector(`#q${question}-urlimage-incorrect-answer3`).value !== '' 
+    ) {
+        haveAnswer4 = true;
+        const qIncorrectAnswer3 = document.querySelector(`#q${question}-incorrect-answer3`).value;
+        const qIncorrectAnswer3_URLImage = document.querySelector(`#q${question}-urlimage-incorrect-answer3`).value;
+        if(qIncorrectAnswer3 === '' || validateURL(qIncorrectAnswer3_URLImage) === false) {
+            alert("Falhou!!!")
+        }
+    }
+
+    if ( (qTitle.length < 20) || 
+        (isHexCodeColor(qColor) === false) || 
+        (qCorrectAnswer === '' || qIncorrectAnswer1 === '') ||
+        (validateURL(qCorrectAnswerURLImage) === false || validateURL(qIncorrectAnswer1_URLImage) === false) 
+    ) {
+        alert("falhou!!!");
+    }
      
     else {
         renderLevelConfigSection();
@@ -154,20 +172,34 @@ const questionInfo = (question) => {
             image: qIncorrectAnswer1_URLImage,
             isCorrectAnswer: false
         }
-    
-        const answer3 = {
-            text: qIncorrectAnswer2,
-            image: qIncorrectAnswer2_URLImage,
-            isCorrectAnswer: false
-        }
-    
-        const answer4 = {
-            text: qIncorrectAnswer3,
-            image: qIncorrectAnswer3_URLImage,
-            isCorrectAnswer: false
-        }
 
-        answers.push(answer1, answer2, answer3, answer4);
+        if(haveAnswer3 === true) {
+            const answer3 = {
+                text: qIncorrectAnswer2,
+                image: qIncorrectAnswer2_URLImage,
+                isCorrectAnswer: false
+            }
+        }
+        
+        if(haveAnswer4 === true) {
+            const answer4 = {
+                text: qIncorrectAnswer3,
+                image: qIncorrectAnswer3_URLImage,
+                isCorrectAnswer: false
+            }
+        }
+        
+        if (haveAnswer3 === true && haveAnswer4 === false) {
+            answers.push(answer1, answer2, answer3);
+        }
+        if (haveAnswer3 === false && haveAnswer4 === true) {
+            answer.push(answer1, answer2, answer4);
+        }
+        if (haveAnswer3 === false && haveAnswer4 === false) {
+            answers.push(answer1, answer2);
+        } else {
+            answers.push(answer1, answer2, answer3, answer4);
+        }
     
         const objQuestion = {
             title: qTitle,
