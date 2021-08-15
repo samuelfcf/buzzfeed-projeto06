@@ -115,9 +115,9 @@ const openQuestionForm = (element) => {
 
 // trird screen
 const questionInfo = (question) => {
-    let haveAnswer3 = false;
-    let haveAnswer4 = false;
     let answers = [];
+    let haveAnswer3 = true;
+    let haveAnswer4 = true;
 
     const qTitle = document.querySelector(`#q${question}-text`).value;
     const qColor = document.querySelector(`#q${question}-color`).value;
@@ -127,33 +127,23 @@ const questionInfo = (question) => {
 
     const qIncorrectAnswer1 = document.querySelector(`#q${question}-incorrect-answer1`).value;
     const qIncorrectAnswer1_URLImage = document.querySelector(`#q${question}-urlimage-incorrect-answer1`).value;
+
+    const qIncorrectAnswer2 = document.querySelector(`#q${question}-incorrect-answer2`).value;
+    const qIncorrectAnswer2_URLImage = document.querySelector(`#q${question}-urlimage-incorrect-answer2`).value;
+    if (qIncorrectAnswer2 === '' && qIncorrectAnswer2_URLImage === '') {
+        haveAnswer3 = false;
+    }
+
+    const qIncorrectAnswer3 = document.querySelector(`#q${question}-incorrect-answer3`).value;
+    const qIncorrectAnswer3_URLImage = document.querySelector(`#q${question}-urlimage-incorrect-answer3`).value;
+    if (qIncorrectAnswer3 === '' && qIncorrectAnswer3_URLImage === '') {
+        haveAnswer4 = false;
+    }
     
-    if (document.querySelector(`#q${question}-incorrect-answer2`).value !== ''
-       && document.querySelector(`#q${question}-urlimage-incorrect-answer2`).value !== ''     
-    ) {
-        haveAnswer3 = true;
-        const qIncorrectAnswer2 = document.querySelector(`#q${question}-incorrect-answer2`).value;
-        const qIncorrectAnswer2_URLImage = document.querySelector(`#q${question}-urlimage-incorrect-answer2`).value;
-        if(qIncorrectAnswer2 === '' || validateURL(qIncorrectAnswer2_URLImage) === false) {
-            alert("Falhou!!!")
-        }
-    }
-
-    if (document.querySelector(`#q${question}-incorrect-answer3`).value !== ''
-       && document.querySelector(`#q${question}-urlimage-incorrect-answer3`).value !== '' 
-    ) {
-        haveAnswer4 = true;
-        const qIncorrectAnswer3 = document.querySelector(`#q${question}-incorrect-answer3`).value;
-        const qIncorrectAnswer3_URLImage = document.querySelector(`#q${question}-urlimage-incorrect-answer3`).value;
-        if(qIncorrectAnswer3 === '' || validateURL(qIncorrectAnswer3_URLImage) === false) {
-            alert("Falhou!!!")
-        }
-    }
-
     if ( (qTitle.length < 20) || 
         (isHexCodeColor(qColor) === false) || 
-        (qCorrectAnswer === '' || qIncorrectAnswer1 === '') ||
-        (validateURL(qCorrectAnswerURLImage) === false || validateURL(qIncorrectAnswer1_URLImage) === false) 
+        (qCorrectAnswer === '' || qIncorrectAnswer1 === '' || (haveAnswer3 === true && qIncorrectAnswer2 === '') || (haveAnswer4 === true && qIncorrectAnswer3 === '')) ||
+        (validateURL(qCorrectAnswerURLImage) === false || (validateURL(qIncorrectAnswer1_URLImage) === false) || (haveAnswer3 === true && validateURL(qIncorrectAnswer2_URLImage) === false) || (haveAnswer4 === true && validateURL(qIncorrectAnswer3_URLImage) === false)) 
     ) {
         alert("falhou!!!");
     }
@@ -173,33 +163,31 @@ const questionInfo = (question) => {
             isCorrectAnswer: false
         }
 
-        if(haveAnswer3 === true) {
-            const answer3 = {
-                text: qIncorrectAnswer2,
-                image: qIncorrectAnswer2_URLImage,
-                isCorrectAnswer: false
-            }
+        const answer3 = {
+            text: qIncorrectAnswer2,
+            image: qIncorrectAnswer2_URLImage,
+            isCorrectAnswer: false
         }
-        
-        if(haveAnswer4 === true) {
-            const answer4 = {
-                text: qIncorrectAnswer3,
-                image: qIncorrectAnswer3_URLImage,
-                isCorrectAnswer: false
+    
+        const answer4 = {
+            text: qIncorrectAnswer3,
+            image: qIncorrectAnswer3_URLImage,
+            isCorrectAnswer: false
             }
-        }
-        
+
+        if (haveAnswer3 === true && haveAnswer4 === true) {
+            answers.push(answer1, answer2, answer3, answer4);
+        } 
         if (haveAnswer3 === true && haveAnswer4 === false) {
             answers.push(answer1, answer2, answer3);
         }
         if (haveAnswer3 === false && haveAnswer4 === true) {
-            answer.push(answer1, answer2, answer4);
+            answers.push(answer1, answer2, answer4);
         }
         if (haveAnswer3 === false && haveAnswer4 === false) {
             answers.push(answer1, answer2);
-        } else {
-            answers.push(answer1, answer2, answer3, answer4);
         }
+        
     
         const objQuestion = {
             title: qTitle,
@@ -217,6 +205,7 @@ const getAllQuestionsInfo = () => {
         questionInfo(i+1);
         console.log(quizz)
     }
+    nextPage(2,3)
 }
 
 const renderLevelConfigSection = () => {
@@ -248,7 +237,6 @@ const renderLevelConfigSection = () => {
     }
 
     levelsQuizz.innerHTML += `<button class="next submit-quizz" onclick="getAllLevelsInfo()">Finalizar Quizz</button>`
-    nextPage(2,3)
 }
 
 const openLevelForm = (element) => {
@@ -303,6 +291,7 @@ const getAllLevelsInfo = () => {
     sendQuizzToServer();
 }
 
+// fourth screen
 const renderQuizzImage = () => {
     console.log(document.querySelector(".quiz-is-ready img"))
     document.querySelector(".quiz-is-ready img").src = quizz.image
