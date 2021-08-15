@@ -263,7 +263,7 @@ const levelInfo = (level) => {
     const lText = document.querySelector(`#l${level}-description`).value;
 
     if( (lTitle.length < 10) || 
-        (lPercent <= 0 && lPercent >=100 ) || 
+        (lPercent <= 0 && lPercent >= 100 ) || 
         (validateURL(lURlImage) === false) ||
         (lText.length < 30) )
         {
@@ -283,9 +283,10 @@ const levelInfo = (level) => {
 }
 
 const getAllLevelsInfo = () => {
+  
     for(let i=0; i<numLevelsRender; i++) {
         levelInfo(i+1);
-        console.log(quizz);
+        console.log(quizz); 
     }
 
     sendQuizzToServer();
