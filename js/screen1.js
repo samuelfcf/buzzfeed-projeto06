@@ -27,7 +27,7 @@ function userQuizzesSection () {
 function getQuizzes() {
 	const promisse = axios.get(URL_QUIZZES);
 	promisse.then(putQuizzesOnPage);
-	promisse.then(checkUserQuizzes);
+	promisse.then(putPersonalQuizzes);
 }
 
 function putQuizzesOnPage (response) {
