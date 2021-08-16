@@ -205,7 +205,12 @@ const getAllQuestionsInfo = () => {
         questionInfo(i+1);
         console.log(quizz)
     }
-    nextPage(2,3)
+
+    if(quizz.questions.length === 0) {
+        console.log("deuruim");
+    } else {
+        nextPage(2,3);
+    }
 }
 
 const renderLevelConfigSection = () => {
@@ -298,8 +303,16 @@ const renderQuizzImage = () => {
     document.querySelector(".quiz-is-ready img").src = quizz.image
 }
 
-const sendQuizzToServer = () => {
+const saveQuizzToLocalStorage = (quizz) => {
     
+    userQuizzes.push(quizz);
+    const quizzJSON = JSON.stringify(userQuizzes);
+    
+    localStorage.setItem("userQuizzes", quizzJSON);
+}
+
+const sendQuizzToServer = () => {
+        
     axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/quizzes", quizz)
         .then((response) => {
             idQuizz = response.data.id;
@@ -310,14 +323,6 @@ const sendQuizzToServer = () => {
         .catch(err => {
             console.log(err);
         });
-}
-
-const saveQuizzToLocalStorage = (quizz) => {
-    
-    userQuizzes.push(quizz);
-    const quizzJSON = JSON.stringify(userQuizzes);
-    
-    localStorage.setItem("userQuizzes", quizzJSON);
 }
 
 const backToHome = () => {
