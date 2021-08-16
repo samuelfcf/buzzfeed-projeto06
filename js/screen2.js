@@ -36,6 +36,7 @@ function getQuizzQuestions(quizzID) {
 		makeBanner(response, quizzID);
 		putQuestionsOnPage(response, quizzID);
 	});
+	scrollTo(0, 0);
 }
 
 function makeBanner(response, quizzID) {
@@ -53,30 +54,23 @@ function putQuestionsOnPage(response, quizzID) {
 	for (let quizz of response.data) {
 		if (quizz.id === quizzID) {
 			const questions = document.querySelector(".questions");
-
 			let answers = "";
-
 			quizzObject = quizz;
 			questions.innerHTML = "";
-
 			for (let question of quizz.questions) {
-
 				question.answers.sort(() => Math.random() - 0.5);
-
 				for (let answer of question.answers) {
 					answers += `<li class="answer ${answer.isCorrectAnswer}" onclick="selectAnswer(this);">\
 						<img src="${answer.image}" alt="Resposta">\
 						${answer.text}\
 					</li>`;
 				}
-
 				questions.innerHTML += `<li id="question-${quizz.questions.indexOf(question)}" class="question">\
 					<div style="background-color: ${quizz.color};" class="question-command">\
 						<span>${question.title}</span>\
 					</div>\
 					<ul class="answers">${answers}</ul>\
 				</li>`;
-
 				answers = "";
 			}
 			break;
@@ -86,11 +80,9 @@ function putQuestionsOnPage(response, quizzID) {
 
 function selectAnswer(item) {
 	if (!item.classList.contains("active") && !item.classList.contains("other")) {
-		item.classList.add("active");
-
 		const answers = item.parentNode;
 		const question = answers.parentNode;
-
+		item.classList.add("active");
 		for (let child of answers.children) {
 			if (!child.classList.contains("active")) {
 				child.classList.add("other");
@@ -114,7 +106,6 @@ function addAnsweredToQuestion (question) {
 function scrollToNextQuestion(question) {
 	const questionID = Number(question.id.substr(9));
 	const heigth = document.querySelector(`#question-${questionID}`).getBoundingClientRect().height;
-
 	setTimeout(() => {
 		putFinalScore();
 		scrollTo(0, 200 + (questionID + 1) * heigth);
@@ -123,22 +114,17 @@ function scrollToNextQuestion(question) {
 
 function putFinalScore () {
 	const questions = document.querySelectorAll(".question");
-
 	if (document.querySelector(".final-score") !== null) return;
-
 	for (let question of questions) {
 		if (!question.classList.contains("answered")) {
 			return;
 		}
 	}
-
 	const rigthQuestions = document.querySelectorAll(".active.true").length;
-	const score = rigthQuestions / questions.length * 100;
-
+	const score = Math.ceil(rigthQuestions / questions.length * 100);
 	let title;
 	let image;
 	let text;
-
 	for (let level of quizzObject.levels.reverse()) {
 		if (score >= level.minValue) {
 			title = level.title;
@@ -147,9 +133,8 @@ function putFinalScore () {
 			break;
 		}
 	}
-
 	document.querySelector(".questions").innerHTML += `<li class="final-score question">\
-		<span class="final-title">${score.toFixed()}%! ${title}</span>
+		<span class="final-title">${score}% de acerto! ${title}</span>
 		<div class="final-info">
 			<img src="${image}">
 			<p>${text}</p>
@@ -167,11 +152,10 @@ function restartGame () {
 function goInitialPage () {
 	const screen1 = document.querySelector(".screen-1");
 	const screen2 = document.querySelector(".screen-2");
-
 	screen1.innerHTML = initialScreen1;
 	getQuizzes();
 	screen1.classList.remove("hidden");
-
 	screen2.innerHTML = initialScreen2;
 	screen2.classList.add("hidden");
+	scrollTo(0, 0);
 }

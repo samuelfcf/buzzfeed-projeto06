@@ -300,10 +300,12 @@ const renderQuizzImage = () => {
 
 const sendQuizzToServer = () => {
     
-    const objRequest = quizz;
+    userQuizzes.push(quizz);
+    const quizzJSON = JSON.stringify(userQuizzes);
+    
+    localStorage.setItem("userQuizzes", quizzJSON);
 
-
-    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/quizzes", objRequest)
+    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/quizzes", quizz)
         .then((response) => {
             idQuizz = response.data.id;
             renderQuizzImage();
