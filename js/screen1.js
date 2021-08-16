@@ -49,7 +49,6 @@ function putPersonalQuizzes() {
 
 function putQuizzesOnHTML(htmlObj, quizzList) {
 	htmlObj.innerHTML = "";
-	console.log(quizzList)
 	for (let quizz of quizzList) {
 		htmlObj.innerHTML += `<li class="quizz-item">\
 			<img id="all-${quizz.id}" src="${quizz.image}" alt="A image about the quizz">\
