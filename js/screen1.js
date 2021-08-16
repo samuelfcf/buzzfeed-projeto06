@@ -52,10 +52,10 @@ function checkUserQuizzes (response) {
 }
 
 function putPersonalQuizzes() {
-	if (userQuizzes.length > 0) {
+	const quizzesOnStorage = localStorage.getItem("userQuizzes")
+	const quizzesObject = JSON.parse(quizzesOnStorage);
+	if (quizzesObject.length > 0) {
 		const personalQuizzesList = document.querySelector(".personal-quizzes .quizz-list");
-		const quizzesOnStorage = localStorage.getItem("userQuizzes")
-		const quizzesObject = JSON.parse(quizzesOnStorage);
 		document.querySelector(".create-initial-quizz").classList.add("hidden");
 		document.querySelector(".personal-quizzes").classList.remove("hidden");
 		putQuizzesOnHTML(personalQuizzesList, quizzesObject);

@@ -187,8 +187,7 @@ const questionInfo = (question) => {
         if (haveAnswer3 === false && haveAnswer4 === false) {
             answers.push(answer1, answer2);
         }
-        
-    
+
         const objQuestion = {
             title: qTitle,
             color: qColor,
