@@ -300,20 +300,24 @@ const renderQuizzImage = () => {
 
 const sendQuizzToServer = () => {
     
-    userQuizzes.push(quizz);
-    const quizzJSON = JSON.stringify(userQuizzes);
-    
-    localStorage.setItem("userQuizzes", quizzJSON);
-
     axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/quizzes", quizz)
         .then((response) => {
             idQuizz = response.data.id;
+            saveQuizzToLocalStorage(response.data);
             renderQuizzImage();
             nextPage(3,4);
         })
         .catch(err => {
             console.log(err);
         });
+}
+
+const saveQuizzToLocalStorage = (quizz) => {
+    
+    userQuizzes.push(quizz);
+    const quizzJSON = JSON.stringify(userQuizzes);
+    
+    localStorage.setItem("userQuizzes", quizzJSON);
 }
 
 const backToHome = () => {
