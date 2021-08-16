@@ -1,4 +1,5 @@
 let quizz = {}
+let userQuizzess = []
 let idQuizz;
 let numQuestionsRender;
 let numLevelsRender;
@@ -187,8 +188,7 @@ const questionInfo = (question) => {
         if (haveAnswer3 === false && haveAnswer4 === false) {
             answers.push(answer1, answer2);
         }
-        
-    
+
         const objQuestion = {
             title: qTitle,
             color: qColor,
@@ -305,10 +305,11 @@ const renderQuizzImage = () => {
 
 const saveQuizzToLocalStorage = (quizz) => {
     
-    userQuizzes.push(quizz);
-    const quizzJSON = JSON.stringify(userQuizzes);
+    userQuizzess.push(quizz);
+    console.log(userQuizzess);
+    const quizzJSON = JSON.stringify(userQuizzess);
     
-    localStorage.setItem("userQuizzes", quizzJSON);
+    localStorage.setItem("userQuizzess", quizzJSON);
 }
 
 const sendQuizzToServer = () => {
@@ -326,7 +327,10 @@ const sendQuizzToServer = () => {
 }
 
 const backToHome = () => {
-   window.location.reload();
+    document.querySelector(".screen-1").classList.remove("hidden");
+    document.querySelector(".screen-3").classList.add("hidden");
+
+    nextPage(4,1);
 }
 
 const accessQuizz = () => {
