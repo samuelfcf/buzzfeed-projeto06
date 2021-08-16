@@ -2,6 +2,10 @@
 	box-sizing: border-box;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	font-family: "Roboto", Arial, sans-serif, helvetica;
 	background-color: #FAFAFA;
@@ -191,12 +195,77 @@ header h1 {
 	margin-bottom: 5px;
 }
 
-.screen-2 .questions .answers .active {
-	background-color: red;
+.screen-2 .questions .answers .correct {
+	color: #009C22;
+}
+
+.screen-2 .question .answers .wrong {
+	color: #FF4B4B;
 }
 
 .screen-2 .questions .answers .other {
 	opacity: .4;
+}
+
+.screen-2 .final-score {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	background-color: white;
+	padding: 15px;
+}
+
+.screen-2 .final-title {
+	display: block;
+	width: 100%;
+	padding: 15px;
+	margin-bottom: 15px;
+	background-color: #EC362D;
+	color: white;
+	font-size: 19px;
+	line-height: 25px;
+	font-weight: 700;
+}
+
+.screen-2 .final-info {
+	display: flex;
+	justify-content: space-between;
+	gap: 15px;
+}
+
+.screen-2 .final-info img {
+	width: calc(50% - 7.5px);
+}
+
+.screen-2 .final-info p {
+	width: calc(50% - 7.5px);
+	word-wrap: break-word;
+	font-size: 19px;
+	line-height: 25px;
+	font-weight: 700;
+}
+
+.screen-2 button {
+	display: block;
+	border: none;
+	font-size: 21px;
+	line-height: 25px;
+	cursor: pointer;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.screen-2 .restart {
+	background-color: #EC362D;
+	color: white;
+	border-radius: 15px;
+	padding: 10px 20px;
+	margin-top: 30px;
+	margin-bottom: 15px;	
+}
+
+.screen-2 .go-home {
+	background: transparent;
+	color: #818181;
 }
 
 /* Third Screen */
@@ -411,12 +480,16 @@ header h1 {
 
 @media (max-width: 1100px) {
 	.container {
-		width: 100%;
+		width: calc(100% - 30px);
 	}
 
 	/* First screen */
 	.screen-1 h3 {
 		margin-left: 15px;
+	}
+
+	.screen-1 .create-initial-quizz button {
+		margin-top: 20px;
 	}
 
 	.screen-1 .personal-quizzes .title {
@@ -461,6 +534,24 @@ header h1 {
 	.screen-2 .questions .question-command,
 	.screen-2 .questions .answers img {
 		height: 120px;
+	}
+
+	.screen-2 .final-info {
+		flex-flow: column;
+	}
+
+	.screen-2 .final-info img, .screen-2 .final-info p {
+		width: 100%;
+	}
+
+	.screen-2 .final-info p {
+		font-size: 17px;
+		line-height: 20px;
+	}
+
+	.screen-2 .restart, .screen-2 .go-home {
+		font-size: 18px;
+		line-height: 21px;
 	}
 
 	/* Third Screen */

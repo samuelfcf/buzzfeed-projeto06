@@ -1,6 +1,7 @@
 const URL_QUIZZES = "https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/quizzes";
 
 let userQuizzes = [];
+let quizzObject;
 
 const personalQuizzes = document.querySelector(".personal-quizzes");
 const createQuizzButton = document.querySelector(".create-quizz");
@@ -42,6 +43,10 @@ function putQuizzesOnPage (response) {
 	for (let quizz of allQuizzesList.children) {		
 		quizz.addEventListener("click", event => {
 			quizzID = Number(event.target.id.substr(4));
+			const finalScore = document.querySelector(".final-score");
+			if (finalScore !== null) {
+				finalScore.remove()
+			}
 			getQuizzQuestions(quizzID);
 		});
 	}
