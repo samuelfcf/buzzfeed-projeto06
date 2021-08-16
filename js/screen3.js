@@ -140,7 +140,7 @@ const questionInfo = (question) => {
         haveAnswer4 = false;
     }
     
-    if ( (qTitle.length < 20) || 
+    if ( (qTitle.length < 20 || qtitle.length > 65) || 
         (isHexCodeColor(qColor) === false) || 
         (qCorrectAnswer === '' || qIncorrectAnswer1 === '' || (haveAnswer3 === true && qIncorrectAnswer2 === '') || (haveAnswer4 === true && qIncorrectAnswer3 === '')) ||
         (validateURL(qCorrectAnswerURLImage) === false || (validateURL(qIncorrectAnswer1_URLImage) === false) || (haveAnswer3 === true && validateURL(qIncorrectAnswer2_URLImage) === false) || (haveAnswer4 === true && validateURL(qIncorrectAnswer3_URLImage) === false)) 
