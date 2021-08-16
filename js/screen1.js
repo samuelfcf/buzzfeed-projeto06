@@ -36,21 +36,6 @@ function putQuizzesOnPage (response) {
 	putPersonalQuizzes();
 }
 
-function checkUserQuizzes (response) {
-	const personalQuizzList = document.querySelector(".personal-quizzes .quizz-list")
-
-	personalQuizzList.innerHTML = "";
-
-	for (let quizz of response.data) {
-		if (quizz.id in userQuizzes) {
-			personalQuizzList.innerHTML += `<li class="quizz-item">\
-				<img src="${quizz.image}" alt="">\
-				<span class="quizz-description">${quizz.title}</span>\
-			</li>`
-		}
-	}
-}
-
 function putPersonalQuizzes() {
 	const quizzesOnStorage = localStorage.getItem("userQuizzes")
 	const quizzesObject = JSON.parse(quizzesOnStorage);
@@ -64,7 +49,7 @@ function putPersonalQuizzes() {
 
 function putQuizzesOnHTML(htmlObj, quizzList) {
 	htmlObj.innerHTML = "";
-
+	console.log(quizzList)
 	for (let quizz of quizzList) {
 		htmlObj.innerHTML += `<li class="quizz-item">\
 			<img id="all-${quizz.id}" src="${quizz.image}" alt="A image about the quizz">\
