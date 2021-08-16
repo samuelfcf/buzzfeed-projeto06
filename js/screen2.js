@@ -53,7 +53,7 @@ function makeBanner(response, quizzID) {
 function putQuestionsOnPage(response, quizzID) {
 	for (let quizz of response.data) {
 		if (quizz.id === quizzID) {
-			const questions = document.querySelector(".questions");
+			const questions = document.querySelector(".screen-2 .questions");
 			let answers = "";
 			quizzObject = quizz;
 			questions.innerHTML = "";
@@ -133,7 +133,7 @@ function putFinalScore () {
 			break;
 		}
 	}
-	document.querySelector(".questions").innerHTML += `<li class="final-score question">\
+	document.querySelector(".screen-2 .questions").innerHTML += `<li class="final-score question">\
 		<span class="final-title">${score}% de acerto! ${title}</span>
 		<div class="final-info">
 			<img src="${image}">
