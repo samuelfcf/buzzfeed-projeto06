@@ -260,7 +260,7 @@ header h1 {
 	border-radius: 15px;
 	padding: 10px 20px;
 	margin-top: 30px;
-	margin-bottom: 15px;	
+	margin-bottom: 15px;
 }
 
 .screen-2 .go-home {
@@ -371,7 +371,7 @@ header h1 {
 	font-size: 20px;
 }
 
-.screen-3 .questions-quizz form .question,
+.screen-3 .questions-quizz form .questionn,
 .correct-answer,
 .incorrect-answers {
 	display: flex;
@@ -540,7 +540,8 @@ header h1 {
 		flex-flow: column;
 	}
 
-	.screen-2 .final-info img, .screen-2 .final-info p {
+	.screen-2 .final-info img,
+	.screen-2 .final-info p {
 		width: 100%;
 	}
 
@@ -549,7 +550,8 @@ header h1 {
 		line-height: 20px;
 	}
 
-	.screen-2 .restart, .screen-2 .go-home {
+	.screen-2 .restart,
+	.screen-2 .go-home {
 		font-size: 18px;
 		line-height: 21px;
 	}

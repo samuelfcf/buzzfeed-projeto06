@@ -1,8 +1,9 @@
 let quizz = {}
-let userQuizzess = []
 let idQuizz;
 let numQuestionsRender;
 let numLevelsRender;
+
+let userQuizzzzes = loadLocalStorage();
 
 // first screen
 const validateURL = (url) => {
@@ -57,7 +58,7 @@ const renderCreateQuestionsSection = () => {
         </div>
         <div class="question${i+1}-form hidden">
             <form action="" id="question${i+1}" class="hidden">
-                <div class="question">
+                <div class="questionn">
                     <span>Pergunta ${i+1}</span>
                     <input id="q${i+1}-text" type="text" placeholder="Texto da pergunta" required>
                     <input id="q${i+1}-color" type="text" placeholder="Cor de fundo da pergunta" required>
@@ -140,7 +141,7 @@ const questionInfo = (question) => {
         haveAnswer4 = false;
     }
     
-    if ( (qTitle.length < 20 || qtitle.length > 65) || 
+    if ( (qTitle.length < 20 || qTitle.length > 65) || 
         (isHexCodeColor(qColor) === false) || 
         (qCorrectAnswer === '' || qIncorrectAnswer1 === '' || (haveAnswer3 === true && qIncorrectAnswer2 === '') || (haveAnswer4 === true && qIncorrectAnswer3 === '')) ||
         (validateURL(qCorrectAnswerURLImage) === false || (validateURL(qIncorrectAnswer1_URLImage) === false) || (haveAnswer3 === true && validateURL(qIncorrectAnswer2_URLImage) === false) || (haveAnswer4 === true && validateURL(qIncorrectAnswer3_URLImage) === false)) 
@@ -309,11 +310,24 @@ const renderQuizzImage = () => {
 
 const saveQuizzToLocalStorage = (quizz) => {
     
-    userQuizzess.push(quizz);
-    const quizzJSON = JSON.stringify(userQuizzess);
+    userQuizzzzes.push(quizz);
+
+    const quizzJSON = JSON.stringify(userQuizzzzes);
     
     localStorage.setItem("userQuizzess", quizzJSON);
 }
+
+function loadLocalStorage() {
+    let userQuizzess = localStorage.getItem("userQuizzess");
+
+    if (userQuizzess === null) {
+        return []
+    } else {
+        const dados = JSON.parse(userQuizzess);
+        return dados;
+    }
+}
+
 
 const sendQuizzToServer = () => {
         

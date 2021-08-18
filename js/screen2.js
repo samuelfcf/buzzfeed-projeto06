@@ -113,6 +113,7 @@ function scrollToNextQuestion(question) {
 }
 
 function putFinalScore () {
+	
 	const questions = document.querySelectorAll(".question");
 	if (document.querySelector(".final-score") !== null) return;
 	for (let question of questions) {
